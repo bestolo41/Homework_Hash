@@ -28,7 +28,8 @@ public class Main {
         RecipeBook recipeBook = new RecipeBook();
         recipeBook.addNewRecipe(krab);
         recipeBook.addNewRecipe(pasta);
-//        System.out.println(recipeBook);
+        System.out.println(recipeBook);
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Домашка про числа

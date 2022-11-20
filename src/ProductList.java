@@ -11,27 +11,29 @@ public class ProductList {
 
     public void addFood(String title, int price, double quantity) {
         Food food = new Food(title, price, quantity);
-        if (productList.contains(food)) throw new RuntimeException("Продукт " + title + " уже в списке");
-        else productList.add(food);
+        if (productList.contains(food)) {
+            throw new RuntimeException("Продукт " + title + " уже в списке");
+        } else {
+            productList.add(food);
+        }
     }
 
     public void addFood(String title, int price) {
-        throw new RuntimeException("Заполните количество товара " + title);
+        this.addFood(title, price, 0);
     }
 
     public void addFood(String title, double quantity) {
-        throw new RuntimeException("Заполните цену товара " + title);
+        this.addFood(title, 0, quantity);
     }
 
     public void addFood(String title) {
-        throw new RuntimeException("Заполните цену и количество товара " + title);
+        this.addFood(title, 0, 0);
     }
 
     public void remove(String title) {
-        for (Object o : getProductList().toArray()) {
-            Food obj = (Food) o;
-            if (obj.getTitle().equals(title)) {
-                getProductList().remove(obj);
+        for (Food food : productList) {
+            if (food.getTitle().equals(title)) {
+                getProductList().remove(food);
                 System.out.println(title + " удален из списка\n");
                 return;
             }
@@ -40,12 +42,9 @@ public class ProductList {
     }
 
     public void purchased(String title) {
-        for (Object o : getProductList().toArray()) {
-            Food obj = (Food) o;
-            if (obj.getTitle().equals(title)) {
-                obj.setPurchased(true);
-                System.out.println("Продукт " + title + " куплен\n");
-                return;
+        for (Food food : productList) {
+            if (food.getTitle().equals(title)) {
+                food.setPurchased(true);
             }
         }
         throw new RuntimeException("В списке нет продукта " + title);
@@ -65,11 +64,11 @@ public class ProductList {
 
     @Override
     public String toString() {                                  // чтоб не печатал в квадратных скобках. Есть способ получше и короче?
-        String text = getTitle() + ":\n";
-        for (Object o : getProductList().toArray()) {
-            Food obj = (Food) o;
-            text = text + obj.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append(getTitle()).append("\n");
+        for (Food food : productList) {
+            builder.append(food.toString());
         }
-        return text;
+        return builder.toString();
     }
 }

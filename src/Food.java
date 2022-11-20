@@ -8,23 +8,11 @@ public class Food {
     private boolean isPurchased = false;
 
     public Food(String title, int price, double quantity) {
-        this.title = title;
-        this.price = price;
-        this.quantity = quantity;
+        setTitle(title);
+        setPrice(price);
+        setQuantity(quantity);
     }
 
-    public Food(String title) {
-
-        this(title, 0, 0);
-    }
-
-    public Food(String title, int price) {
-        this(title, price, 0);
-    }
-
-    public Food(String title, double quantity) {
-        this(title, 0, quantity);
-    }
 
     public int getPrice() {
         return price;
@@ -38,12 +26,28 @@ public class Food {
         return quantity;
     }
 
+    public void setTitle(String title) {
+        if (title == null || title.isEmpty() || title.isBlank()) {
+            throw new RuntimeException("Заполните название товара");
+        } else {
+            this.title = title;
+        }
+    }
+
     public void setPrice(int price) {
-        this.price = price;
+        if (price == 0) {
+            throw new RuntimeException("Заполните цену товара");
+        } else {
+            this.price = price;
+        }
     }
 
     public void setQuantity(double quantity) {
-        this.quantity = quantity;
+        if (quantity == 0) {
+            throw new RuntimeException("Заполните количество товара");
+        } else {
+            this.quantity = quantity;
+        }
     }
 
     public void setPurchased(boolean purchased) {
@@ -55,16 +59,16 @@ public class Food {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Food food = (Food) o;
-        return price == food.price && Double.compare(food.quantity, quantity) == 0 && isPurchased == food.isPurchased && Objects.equals(title, food.title);
+        return title.equals(food.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, price, quantity, isPurchased);
+        return Objects.hash(title);
     }
 
     @Override
     public String toString() {
-        return (isPurchased == true ? "\uF0FE " : "☐ ") + title + ", " + quantity + "кг, " + price + "руб\n";
+        return (isPurchased ? "\uF0FE " : "☐ ") + title + ", " + quantity + "кг, " + price + "руб\n";
     }
 }

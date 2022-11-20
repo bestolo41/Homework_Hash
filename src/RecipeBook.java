@@ -5,17 +5,19 @@ public class RecipeBook {
     private Set<Recipe> recipeBook = new HashSet<>();
 
     public void addNewRecipe(Recipe recipe) {
-        if (!recipeBook.contains(recipe)) recipeBook.add(recipe);
-        else throw new RuntimeException("Рецепт уже имеется в книге");
+        if (recipeBook.add(recipe)) {}
+        else {
+            throw new RuntimeException("Рецепт уже имеется в книге");
+        }
     }
 
     @Override
     public String toString() {
-        String text = "";
-        for (Object o : recipeBook.toArray()) {
-            Recipe obj = (Recipe) o;
-            text = text + obj.toString();
+        StringBuilder builder = new StringBuilder();
+        for (Recipe recipe : recipeBook) {
+            builder.append(recipe.toString()).append("\n");
         }
-        return text;
+        return builder.toString();
     }
 }
+

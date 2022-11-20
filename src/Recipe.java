@@ -12,10 +12,8 @@ public class Recipe {
 
     public void addProductList(ProductList productList) {
         this.list = productList;
-
-        for (Object o : list.getProductList().toArray()) {
-            Food obj = (Food) o;
-            this.price = this.price + (obj.getPrice() * obj.getQuantity());
+        for (Food food : list.getProductList()) {
+            this.price = this.price + (food.getPrice() * food.getQuantity());
         }
     }
 

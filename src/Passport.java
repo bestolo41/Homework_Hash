@@ -51,11 +51,7 @@ public class Passport {
     }
 
     public void addTo(Map<String, Passport> map) {
-        if (map.containsKey(this.getPassNum())) {
-            map.get(getPassNum()).setName(this.getName());
-            map.get(getPassNum()).setSurname(this.getSurname());
-            map.get(getPassNum()).setPatronymic(this.getPatronymic());
-        } else map.put(this.getPassNum(), this);
+        map.put(this.getPassNum(), this);
     }
 
     @Override
